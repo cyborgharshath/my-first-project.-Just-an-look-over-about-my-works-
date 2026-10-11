@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CYBORG FREELANCING</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Figtree:wght@400;600&display=swap">
+<style>
+:root{--sky1:#35AAEA;--sky2:#0A68B0;--glass:rgba(255,255,255,.16);--line:rgba(255,255,255,.42);--hi:#FFE08A;--deep:#0A5A96;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;min-height:100vh;color:#fff;font:400 17px/1.6 Figtree,system-ui,sans-serif;background:linear-gradient(160deg,var(--sky1),var(--sky2)) fixed;overflow-x:hidden}
+h1,h2,h3,.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+[hidden]{display:none!important}
+/* animated background */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.bg::before{content:"";position:absolute;inset:-60px;background-image:linear-gradient(rgba(255,255,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.09) 1px,transparent 1px);background-size:56px 56px;animation:grid 14s linear infinite}
+.orb{position:absolute;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.4),rgba(255,255,255,0) 70%);animation:float 9s ease-in-out infinite}
+.o1{width:380px;height:380px;left:-100px;top:8%}.o2{width:300px;height:300px;right:-60px;top:45%;animation-delay:-3s}.o3{width:240px;height:240px;left:35%;bottom:-80px;animation-delay:-6s}
+@keyframes grid{to{transform:translate(56px,56px)}}
+@keyframes float{50%{transform:translateY(-40px) scale(1.08)}}
+/* login */
+#login{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 18px;transition:opacity .6s,transform .6s}
+#login.leave{opacity:0;transform:scale(1.06)}
+#brand{display:flex;flex-wrap:wrap;justify-content:center;margin:0 0 6px;font-size:clamp(2rem,9.5vw,3.6rem);font-weight:800;letter-spacing:.02em;line-height:1.1;text-align:center}
+#brand span{display:inline-block;opacity:0;transform:translateY(-40px) rotateX(80deg);animation:drop .7s cubic-bezier(.2,.9,.3,1.2) forwards}
+#brand .sp{width:100%;height:0}
+@keyframes drop{to{opacity:1;transform:none}}
+.tag{margin:0 0 26px;opacity:.95;text-align:center;animation:fade 1s .9s both}
+@keyframes fade{from{opacity:0}}
+.card{width:min(420px,100%);padding:26px 24px;border-radius:22px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 20px 50px rgba(5,50,100,.3);animation:rise .9s 1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}}
+.card h2{margin:0 0 16px;font-size:1.25rem}
+label{display:block;font-size:.9rem;margin:14px 0 6px;font-weight:600}
+input{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:rgba(255,255,255,.18);color:#fff;font:inherit;transition:border-color .25s,box-shadow .25s,background .25s}
+input::placeholder{color:rgba(255,255,255,.78)}
+input:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.28);box-shadow:0 0 0 4px rgba(255,255,255,.25)}
+.err{min-height:1.4em;margin:10px 0 0;color:var(--hi);font-size:.9rem}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border:0;border-radius:12px;background:#fff;color:var(--deep);font:700 1rem "JetBrains Mono",monospace;cursor:pointer;text-decoration:none;transition:transform .25s,box-shadow .25s}
+.btn::after{content:"";position:absolute;top:0;left:-80%;width:50%;height:100%;background:linear-gradient(100deg,transparent,rgba(53,170,234,.35),transparent);transform:skewX(-20deg);transition:left .6s}
+.btn:hover::after{left:130%}
+.btn:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(5,50,100,.35)}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;color:#fff;border:1.5px solid #fff}
+.btn.ghost::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent)}
+.btn .ar{transition:transform .25s}.btn:hover .ar{transform:translateX(5px)}
+.btn:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+.full{width:100%;margin-top:6px}
+.or{display:flex;align-items:center;gap:12px;margin:20px 0 14px;font-size:.85rem;opacity:.9}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.soc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.soc button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:11px 6px;border-radius:12px;border:1.5px solid var(--line);background:rgba(255,255,255,.14);color:#fff;font:600 .85rem Figtree,sans-serif;cursor:pointer;transition:transform .25s,background .25s}
+.soc button:hover{transform:translateY(-4px);background:rgba(255,255,255,.3)}
+.soc b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#fff;color:var(--deep);font:800 1rem "JetBrains Mono",monospace}
+.note{margin:16px 0 0;font-size:.8rem;opacity:.85;text-align:center}
+.ok{display:none;text-align:center;padding:24px 0}
+.card.done form,.card.done .or,.card.done .soc,.card.done h2,.card.done .note{display:none}
+.card.done .ok{display:block}
+.ok svg{width:96px;height:96px}
+.ok circle,.ok path{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:300;stroke-dashoffset:300}
+.card.done .ok circle{animation:draw .8s forwards}.card.done .ok path{animation:draw .5s .6s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.ok p{margin:14px 0 0;font-family:"JetBrains Mono",monospace;font-weight:700}
+.dots::after{content:"";animation:dots 1.2s steps(4) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+/* app */
+#app{position:relative;z-index:1;animation:fade .8s}
+header{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px 18px;padding:14px 22px;background:rgba(10,104,176,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font:800 1.05rem "JetBrains Mono",monospace;letter-spacing:.04em;color:#fff;text-decoration:none}
+nav{display:flex;gap:6px;align-items:center;overflow-x:auto}
+nav a{position:relative;padding:6px 12px;color:#fff;text-decoration:none;font:500 .92rem "JetBrains Mono",monospace;white-space:nowrap}
+nav a::after{content:"";position:absolute;left:12px;right:12px;bottom:0;height:2px;background:#fff;transform:scaleX(0);transition:transform .3s}
+nav a:hover::after{transform:scaleX(1)}
+nav button{margin-left:8px;padding:7px 14px;border-radius:10px;border:1.5px solid #fff;background:transparent;color:#fff;font:600 .85rem "JetBrains Mono",monospace;cursor:pointer;transition:background .25s,color .25s}
+nav button:hover{background:#fff;color:var(--deep)}
+section{max-width:1040px;margin:0 auto;padding:72px 22px}
+.hero{min-height:84vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:999px;background:var(--glass);border:1px solid var(--line);font:500 .9rem "JetBrains Mono",monospace}
+.pill i{width:9px;height:9px;border-radius:50%;background:#7CFFB2;animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(124,255,178,.7)}100%{box-shadow:0 0 0 12px rgba(124,255,178,0)}}
+h1{margin:22px 0 10px;font-size:clamp(2.1rem,7.5vw,4rem);line-height:1.12;font-weight:800}
+.type{display:block;min-height:1.2em;color:var(--hi)}
+.type::after{content:"|";margin-left:3px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.sub{max-width:560px;margin:8px auto 28px;font-size:1.1rem}
+.row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.marq{overflow:hidden;border-block:1px solid var(--line);background:rgba(255,255,255,.1);padding:14px 0}
+.marq div{display:flex;width:max-content;gap:40px;animation:scroll 22s linear infinite;font:700 1rem "JetBrains Mono",monospace;letter-spacing:.08em}
+.marq span::after{content:"\2726";margin-left:40px;color:var(--hi)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+h2.t{margin:0 0 8px;font-size:clamp(1.6rem,5vw,2.4rem);text-align:center}
+.lead{max-width:560px;margin:0 auto 36px;text-align:center}
+.grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.box{padding:24px;border-radius:20px;background:var(--glass);border:1px solid var(--line);transition:transform .3s,background .3s,box-shadow .3s}
+.box:hover{transform:translateY(-8px);background:rgba(255,255,255,.26);box-shadow:0 18px 36px rgba(5,50,100,.3)}
+.box .ic{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:#fff;font-size:1.6rem;margin-bottom:14px;transition:transform .4s}
+.box:hover .ic{transform:rotate(-10deg) scale(1.12)}
+.box h3{margin:0 0 6px;font-size:1.1rem}.box p{margin:0}
+.steps{counter-reset:s}
+.steps .box{position:relative;padding-top:44px}
+.steps .box::before{counter-increment:s;content:counter(s);position:absolute;top:-16px;left:22px;width:36px;height:36px;border-radius:50%;background:var(--hi);color:var(--deep);display:grid;place-items:center;font:800 1rem "JetBrains Mono",monospace}
+.price{text-align:center;padding:40px 24px;border-radius:24px;background:linear-gradient(120deg,rgba(255,255,255,.3),rgba(255,255,255,.12));border:1px solid var(--line)}
+.price h2{margin:0 0 8px}
+.cl{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:18px;background:var(--glass);border:1px solid var(--line);color:#fff;text-decoration:none;transition:transform .3s,background .3s}
+.cl:hover{transform:translateX(8px);background:rgba(255,255,255,.28)}
+.cl b{display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:50%;background:#fff;color:var(--deep);font:800 .95rem "JetBrains Mono",monospace;transition:transform .4s}
+.cl:hover b{transform:rotate(360deg)}
+.cl small{display:block;opacity:.85}.cl strong{font-family:"JetBrains Mono",monospace;overflow-wrap:anywhere}
+footer{padding:28px 22px 40px;text-align:center;font:500 .85rem "JetBrains Mono",monospace;opacity:.9}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.rv.on{opacity:1;transform:none}
+@media (max-width:640px){header{padding:10px 14px}.logo{font-size:.95rem}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+
+<!-- LOGIN -->
+<main id="login">
+  <h1 id="brand" data-text="CYBORG FREELANCING" aria-label="CYBORG FREELANCING">CYBORG FREELANCING</h1>
+  <p class="tag">Websites and apps, built simple.</p>
+  <div class="card" id="card">
+    <h2>Log in to continue</h2>
+    <form id="form" novalidate>
+      <label for="em">Email</label>
+      <input id="em" type="email" placeholder="you@example.com" autocomplete="email">
+      <label for="pw">Password</label>
+      <input id="pw" type="password" placeholder="Your password" autocomplete="current-password">
+      <p class="err" id="err" role="alert"></p>
+      <button class="btn full" type="submit">Log in <span class="ar">&rarr;</span></button>
+    </form>
+    <div class="or">or continue with</div>
+    <div class="soc">
+      <button type="button" data-p="Google"><b>G</b>Google</button>
+      <button type="button" data-p="Facebook"><b>f</b>Facebook</button>
+      <button type="button" data-p="X"><b>X</b>X</button>
+    </div>
+    <p class="note">Demo login: any valid email and a password of 6+ characters.</p>
+    <div class="ok" aria-live="polite">
+      <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="44"/><path d="M30 52l14 14 27-30"/></svg>
+      <p>Welcome<span class="dots"></span></p>
+    </div>
+  </div>
+</main>
+
+<!-- SITE -->
+<div id="app" hidden>
+  <header>
+    <a class="logo" href="#home">CYBORG FREELANCING</a>
+    <nav>
+      <a href="#home">Home</a><a href="#services">Services</a><a href="#how">How I work</a><a href="#contact">Contact</a>
+      <button id="out" type="button">Log out</button>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <span class="pill"><i></i>Website &amp; App Developer</span>
+    <h1>I build simple websites and apps<span class="type" id="type"></span></h1>
+    <p class="sub">Clean, fast and easy to use, made for your business and priced low so anyone can afford it.</p>
+    <div class="row">
+      <a class="btn" href="#services">See what I do <span class="ar">&rarr;</span></a>
+      <a class="btn ghost" href="#contact">Contact me</a>
+    </div>
+  </section>
+
+  <div class="marq" aria-hidden="true"><div>
+    <span>WEBSITES</span><span>MOBILE APPS</span><span>LOW PRICES</span><span>FAST DELIVERY</span><span>SIMPLE DESIGN</span><span>EASY TO USE</span>
+    <span>WEBSITES</span><span>MOBILE APPS</span><span>LOW PRICES</span><span>FAST DELIVERY</span><span>SIMPLE DESIGN</span><span>EASY TO USE</span>
+  </div></div>
+
+  <section id="services">
+    <h2 class="t rv">What I can do for you</h2>
+    <p class="lead rv">Simple tools that make your work easier and help your customers find you.</p>
+    <div class="grid">
+      <div class="box rv"><div class="ic">&#127760;</div><h3>Websites</h3><p>Business sites, portfolios and landing pages that look good on every screen.</p></div>
+      <div class="box rv"><div class="ic">&#128241;</div><h3>Apps</h3><p>Installable apps that work on Android, iPhone and computers.</p></div>
+      <div class="box rv"><div class="ic">&#9889;</div><h3>Simple tools</h3><p>Booking forms, trackers and calculators that save you time.</p></div>
+      <div class="box rv"><div class="ic">&#128295;</div><h3>Fixes and updates</h3><p>Already have a site? I can improve it, fix it or add new features.</p></div>
+    </div>
+  </section>
+
+  <section id="how">
+    <h2 class="t rv">How I work</h2>
+    <p class="lead rv">Four easy steps from your idea to a live link.</p>
+    <div class="grid steps">
+      <div class="box rv"><h3>You share your idea</h3><p>A quick chat about what you need.</p></div>
+      <div class="box rv"><h3>I send a preview</h3><p>You see a working version early.</p></div>
+      <div class="box rv"><h3>We improve it</h3><p>Tell me what to change until you are happy.</p></div>
+      <div class="box rv"><h3>It goes live</h3><p>You get a link to share with everyone.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="price rv">
+      <h2>Low prices, no surprises</h2>
+      <p>You know the full cost before I start. Message me your idea and I will reply with a plan and a price.</p>
+      <p><a class="btn" href="#contact">Get my price <span class="ar">&rarr;</span></a></p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="t rv">Let's work together</h2>
+    <p class="lead rv">Pick whichever is easiest for you. I reply fast.</p>
+    <div class="grid" id="links"></div>
+  </section>
+
+  <footer>&copy; <span id="yr"></span> CYBORG FREELANCING</footer>
+</div>
+
+<script>
+/* EDIT YOUR DETAILS HERE */
+const CONFIG={gmail:"cyborgharshath@gmail.com",instagram:"cyborg_freelancing",x:"cyborgharshath",github:"cyborgharshath"};
+
+const $=s=>document.querySelector(s), reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* brand letters */
+const b=$("#brand");
+b.innerHTML=[...b.dataset.text].map((c,i)=>c===" "?'<span class="sp"></span>':'<span style="animation-delay:'+(i*55)+'ms">'+c+'</span>').join("");
+
+/* contact links */
+const L=[["G","Gmail",CONFIG.gmail,"mailto:"+CONFIG.gmail],["IG","Instagram","@"+CONFIG.instagram,"https://instagram.com/"+CONFIG.instagram],
+["X","X (Twitter)","@"+CONFIG.x,"https://x.com/"+CONFIG.x],["GH","GitHub",CONFIG.github,"https://github.com/"+CONFIG.github]];
+$("#links").innerHTML=L.map(l=>'<a class="cl rv" href="'+l[3]+'" target="_blank" rel="noopener"><b>'+l[0]+'</b><span><small>'+l[1]+'</small><strong>'+l[2]+'</strong></span></a>').join("");
+$("#yr").textContent=new Date().getFullYear();
+
+/* login */
+const card=$("#card"), err=$("#err");
+function enter(){
+  card.classList.add("done");
+  setTimeout(()=>{
+    $("#login").classList.add("leave");
+    setTimeout(()=>{$("#login").hidden=true;$("#app").hidden=false;scrollTo(0,0);reveal();typer();},600);
+  },1900);
+}
+$("#form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const em=$("#em").value.trim(), pw=$("#pw").value;
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){return bad("Enter a valid email address.")}
+  if(pw.length<6){return bad("Password must be at least 6 characters.")}
+  err.textContent="";enter();
+});
+function bad(m){err.textContent=m;card.classList.remove("shake");void card.offsetWidth;card.classList.add("shake")}
+document.querySelectorAll(".soc button").forEach(x=>x.addEventListener("click",enter));
+$("#out").addEventListener("click",()=>{
+  $("#app").hidden=true;const l=$("#login");l.hidden=false;
+  requestAnimationFrame(()=>{l.classList.remove("leave");card.classList.remove("done");$("#form").reset();scrollTo(0,0)});
+});
+
+/* moving text */
+let tv=0;
+function typer(){
+  if(tv)return;tv=1;
+  const W=["that are fast.","that are easy to use.","at a low price.","that grow your business."],el=$("#type");
+  if(reduce){el.textContent=W[0];return}
+  let w=0,c=0,del=false;
+  (function step(){
+    const s=W[w];
+    el.textContent=s.slice(0,c);
+    if(!del&&c<s.length){c++;return setTimeout(step,70)}
+    if(!del){del=true;return setTimeout(step,1400)}
+    if(c>0){c--;return setTimeout(step,35)}
+    del=false;w=(w+1)%W.length;setTimeout(step,300);
+  })();
+}
+
+/* scroll reveal */
+function reveal(){
+  const els=document.querySelectorAll(".rv");
+  if(reduce||!("IntersectionObserver" in window)){els.forEach(x=>x.classList.add("on"));return}
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add("on");io.unobserve(en.target)}}),{threshold:.15});
+  els.forEach((x,i)=>{x.style.transitionDelay=(i%4)*90+"ms";io.observe(x)});
+}
+</script>
+</body>
+</html>
